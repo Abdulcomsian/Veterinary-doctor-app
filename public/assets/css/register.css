@@ -1,0 +1,48 @@
+.registration-form .social-login{
+    padding: 2.5rem;
+}
+.registration-form .social-login .hasAcc-text{
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-align: center;
+}
+.registration-form .social-login .hasAcc-text .link{
+    border-bottom: 1px solid #7A5AF8;
+}
+.registration-form .social-login .btns-container{
+    display: flex;
+    gap: 20px;
+}
+.registration-form .social-login .btns-container .btn{
+    flex-grow: 1;
+}
+.registration-form .social-login .btn--google-login{
+    color: #FF3D00;
+    border: 1px solid #FF3D00;
+}
+.registration-form .social-login .btn--facebook-login{
+    color: var(--color-blue);
+    border: 1px solid var(--color-blue);
+}
+
+
+@media screen and (max-width: 768px) {
+    .section-register-form{
+        margin-top: 3rem !important;
+    }
+    .registration-form{
+        width: 75%;
+    }
+}
+@media screen and (max-width: 575px) {
+    .profile-nav{
+        text-align: center;
+    }
+    .section-register-form .section-header{
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    .registration-form .social-login .btns-container{
+        flex-direction: column;
+    }
+}

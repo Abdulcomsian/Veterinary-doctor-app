@@ -1,0 +1,40 @@
+.link-forgot-pass{
+    font-size: 1.6rem;
+    font-weight: 500;
+    display: table;
+    margin-left: auto;
+    margin-top: 0.5rem;
+}
+
+.login-form .social-login .btns-container{
+    display: flex;
+    gap: 20px;
+}
+
+.login-form .social-login .btns-container .btn{
+    flex-grow: 1;
+}
+
+.login-form .social-login .hasAcc-text{
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .section-login-form{
+        margin-top: 3rem !important;
+    }
+}
+@media screen and (max-width: 575px) {
+    .profile-nav{
+        text-align: center;
+    }
+    .section-login-form .section-header{
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    .login-form .social-login .btns-container{
+        flex-direction: column;
+    }
+}
