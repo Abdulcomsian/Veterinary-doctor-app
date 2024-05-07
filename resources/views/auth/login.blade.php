@@ -68,7 +68,7 @@
             <div class="or-container">OR</div>
             <div class="btns-container mb-5">
               <a href="{{route('googleLogin')}}" class="btn btn--google-login"> <img src="/assets/images/flat-color-icons_google.svg" alt="" />Google</a>
-              <button class="btn btn--facebook-login"><img src="/assets/images/facebook-icon.svg" class="me-1" alt=""/>Facebook</button>
+              <a href="{{route('facebookLogin')}}"  class="btn btn--facebook-login"><img src="/assets/images/facebook-icon.svg" class="me-1" alt=""/>Facebook</a>
             </div>
           </div>
         </div>
