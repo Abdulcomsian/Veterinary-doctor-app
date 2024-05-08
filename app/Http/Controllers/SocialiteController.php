@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
+
 
 class SocialiteController extends Controller
 {
@@ -22,21 +24,27 @@ class SocialiteController extends Controller
     {
         try{
             $userDetail = Socialite::driver('google')->user();
+
             if($userDetail){
                 $user = $userDetail->user;
-                $existingUser = User::where('email' , $user['email'])->first();
-                if(!$existingUser){
-                    $newUser = User::create(['platform' => 'google' , 'platform_id' => $user['id'] , 'email' => $user['email']]);
-                    auth()->login($newUser , true);
+                $email = $user['email'];
+                $platformId = $user['id'];
+                $username = $user['name'];
+                $platform = 'google';
+                $image = $user['picture'];
+
+                
+                $response = $this->loginSocialiteUser($platform , $platformId , $email , $username , $image );
+                
+                if(!$response['status'])
+                {
+                    toastr()->error($response['error']);
+                    return redirect()->route('login');
                 }else{
-                    if($existingUser->platform != 'google')
-                    {
-                        return redirect()->route('login')->with(['error' => 'You have previously login with different platform']);
-                    
-                    }else{
-                        auth()->login($existingUser , true);
-                    }
+                    toastr()->success($response['msg']);
+                    return redirect()->route('getProfilePage');
                 }
+               
             }
 
 
@@ -58,8 +66,36 @@ class SocialiteController extends Controller
     }
 
 
-    public function addSocialiteUser($userDetail , $platform)
+    public function loginSocialiteUser($platform , $platformId , $email , $username , $image = null )
     {
+        $existingUser = User::where('email' , $email)->first();
+        
+        if($existingUser){
+            if($existingUser->platform != $platform){
+                return ['status' => false , 'error' => 'You have already been login with different platform'];
+            }
+
+            auth()->login($existingUser , TRUE);
+
+            return ['status' => true , 'msg' => 'login successfully' ];
+        }else{
+          $user = new User;
+          $user->platform_id = $platformId;
+          $user->platform = $platform;
+          $user->password = Crypt::encryptString($platformId);
+          $user->name = $username;
+          $user->image = $image;
+          $user->email = $email;
+          $user->save();
+          
+          auth()->login($user , TRUE);
+
+          return ['status' => true , 'msg' => 'login successfully' ];
+        }
+
+
+
+
 
     }
 }

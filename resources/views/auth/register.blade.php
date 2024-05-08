@@ -21,6 +21,11 @@
             <h2 class="secondary-heading">Registration</h2>
             <p class="short-desc">Kindly fill in your details below to create an account</p>
           </header>
+          @if($errors->any())
+          <div id="error-box">
+              {{$errors}}
+          </div>
+          @endif
           <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="mb-5">
@@ -43,7 +48,7 @@
             </div>
             <div class="mb-5">
               <label for="email" class="form-label">Email Address</label>
-              <input type="password" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" placeholder="Enter your email"/>
+              <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" id="email" placeholder="Enter your email"/>
               @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -52,7 +57,7 @@
             </div>
             <div class="mb-5">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="**************"/>
+              <input type="password" class="form-control" id="password" name="password" placeholder="**************"/>
               @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

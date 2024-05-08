@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\{SocialiteController, UserController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,9 +19,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('google-login' , [SocialiteController::class , 'googleLogin'])->name('googleLogin');
 Route::get('auth/google/callback' , [SocialiteController::class , 'googleCallback'])->name('googleCallback');
 Route::get('facebook-login' , [SocialiteController::class , 'facebookLogin'])->name('facebookLogin');
 Route::get('auth/facebook/callback' , [SocialiteController::class , 'facebookCallback'])->name('facebookCallback');
+
+Route::group(['middleware' => ['prevent.back.header' ,'auth']] , function(){
+    Route::get('/', [UserController::class, 'getProfilePage']);
+    Route::get('profile' , [UserController::class, 'getProfilePage'])->name('getProfilePage');
+    Route::get('logout' , [UserController::class , 'logout'])->name('logout');
+});

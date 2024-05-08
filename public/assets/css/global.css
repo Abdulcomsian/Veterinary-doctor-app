@@ -339,6 +339,23 @@ input[type="password"]:after{
     color: var(--color-primary);
 }
 
+.user-name-box {
+    cursor: pointer;
+    position: relative;
+    height: 50px;
+    text-align: center;
+    max-width: fit-content;
+}
+
+a.header-dropdown-menu-item {
+    cursor: pointer;
+    color: #A381DB;
+    position: absolute;
+    right: 17px;
+    top: 50px;
+    font-size: 20px;
+}
+
 @media screen and (max-width: 1400px) {
     .step:not(:last-child) .step-num-box::after{
         width: 115px;

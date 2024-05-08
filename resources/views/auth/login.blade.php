@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="{{asset('assets/css/global.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/login.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/packages/toastr/toastr.min.css')}}">
     <title>Document</title>
   </head>
   <body>
@@ -15,6 +16,7 @@
     </header>
 
 <section class="section-login-form mt-3">
+<div id="toast-container" class="toast-top-right"></div>
       <div class="container">
         <div class="auth-profile-layout login-form">
           <header class="section-header">
@@ -27,7 +29,7 @@
             @csrf
             <div class="mb-5">
               <label for="email" class="form-label">Email Address</label>
-              <input type="email" class="form-control  @error('email') is-invalid @enderror" id="email" placeholder="Enter your email"  value="{{ old('email') }}" required autocomplete="email" autofocus/>
+              <input type="email" class="form-control  @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your email"  value="{{ old('email') }}" required autocomplete="email" autofocus/>
               @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -36,7 +38,7 @@
             </div>
             <div class="mb-5">
               <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" placeholder="**************"/>
+              <input type="password" class="form-control" id="password" name="password" placeholder="**************"/>
               @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -74,6 +76,7 @@
         </div>
       </div>
     </section>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{asset('assets/packages/toastr/toastr.min.js')}}"></script>
     </body>
 </html>
