@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{SocialiteController, UserController};
+use App\Http\Controllers\{HomeController, SocialiteController, UserController , PetController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,4 +29,6 @@ Route::group(['middleware' => ['prevent.back.header' ,'auth']] , function(){
     Route::get('/', [UserController::class, 'getProfilePage']);
     Route::get('profile' , [UserController::class, 'getProfilePage'])->name('getProfilePage');
     Route::get('logout' , [UserController::class , 'logout'])->name('logout');
+    Route::post('add-pet' , [PetController::class , 'addPet'])->name('addPet');
+    Route::get('dashboard' , [HomeController::class , 'dashboard']);
 });

@@ -39,7 +39,8 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        return auth()->check() && auth()->user()->hasRole('owner') ? '/profile' : 'dashboard';
+
+        return auth()->check() && auth()->user()->hasRole('owner') ? '/profile' : '/dashboard';
     }
 
     

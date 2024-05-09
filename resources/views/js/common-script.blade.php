@@ -1,6 +1,5 @@
 <script>
-$(document).ready(function(){
-    
+
     async function updateFormData(url , form , type = null, loader = null , modal = null  , cb = null , html = null){
         form.append("_token" , "{{csrf_token()}}");
         $.ajax({
@@ -13,6 +12,7 @@ $(document).ready(function(){
             success: function(res){
                 switch(type){
                     case (1):
+                        //return boolean response
                         return true;
                     break;
                     case (2):
@@ -30,7 +30,5 @@ $(document).ready(function(){
             }
         })
     }
-
-});
 
 </script>

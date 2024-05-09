@@ -57,13 +57,5 @@ document
     }
   });
 
+// DASHBOARD SIDEBAR LINKS ACTIVE CLASS FUNATINALITY
 
-  document.querySelector(".user-name-box").addEventListener("click" , function(e){
-    let menu = document.querySelector(".header-dropdown-menu");
-    menu.classList.contains("d-none") ? menu.classList.remove("d-none") : menu.classList.add("d-none")
-  })
-
-  document.addEventListener("click" , function(event){
-    let element = event.target;
-    if(!element.classList.contains("user-name-box") || !element.closest(".user-name-box")) document.querySelector(".header-dropdown-menu").classList.add("d-none");
-  })

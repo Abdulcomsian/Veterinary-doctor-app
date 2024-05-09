@@ -47,14 +47,64 @@ function updateStepUI() {
   updateActionBtns(activeStep);
 }
 
-nextBtnEl.addEventListener("click", function () {
+nextBtnEl.addEventListener("click", async function () {
   const isCurrentFormValidated = true;
 
-  if (isCurrentFormValidated && activeStep < allStepsContent.length) {
+ 
+  let loader = document.querySelector(".progress")
+  let formDetail = getFormDetail();
+  let response = await updateFormData(formDetail.url , formDetail.form , 1 , loader)
+
+  if (response && isCurrentFormValidated && activeStep < allStepsContent.length) {
     activeStep++;
     updateStepUI();
   }
+
 });
+
+
+function getFormDetail()
+{
+  let stepContent = document.querySelector(".step-content:not(.d-none)");
+  let formDetail = {};
+  if(stepContent.classList.contains('step-content-1')){
+    formDetail = {...getPetFormData()};
+  }else if(stepContent.classList.contains('step-content-2')){
+
+  }else if(stepContent.classList.contains('step-content-3')){
+    
+  }else if(stepContent.classList.contains('step-content-4')){
+    
+  }
+
+  return formDetail;
+}
+
+function getPetFormData(){
+  let petName = document.getElementById("name").value;
+  let age = document.getElementById("age").value;
+  let breed = document.getElementById("breed").value;
+  
+  let previousChecked = document.querySelector("input[name='already-seen']").value == yes ? 1 : 0;
+  let previousAppointmentDate = document.getElementById("previous-appointment-date").value;
+    
+  let url = '{{route("addPet")}}';
+  let form = new FormData();
+  
+  form.append('petName' , petName);
+  form.append('age' , age);
+  form.append('breed' , breed);
+  if(document.getElementById("medical-history").files[0]){
+    form.append('medicalHistory' , document.getElementById("medical-history").files[0])
+  }
+  form.append('previousChecked' , previousChecked);
+  form.append('previousAppointmentDate' , previousAppointmentDate);
+
+  myDropzone.getAcceptedFiles().forEach(function(file) {
+      form.append('petProfilePictures[]' , file);
+  })
+  return {url : url , form : form};
+}
 
 prevBtnEl.addEventListener("click", function () {
   if (activeStep > 1) {

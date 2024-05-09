@@ -87,33 +87,28 @@
                 <p class="title">(Size should not greater then 5mb)</p>
               </div>
               <div class="upload">
-                <div id="image-container"></div>
+              <div id="pet-pictures" class="dropzone"></div>
+                <!-- <div id="image-container"></div>
                 <label for="file-input" class="add-btn-upload">
                   <img src="/assets/images/add-outline.svg" alt="" />
                 </label>
-                <input
-                  type="file"
-                  class="d-none"
-                  id="file-input"
-                  accept="image/*"
-                  multiple
-                />
+                <input type="file" class="d-none" id="file-input" accept="image/*" multiple/> -->
               </div>
               <h4 class="title">
                 Has your pet been physically seen by Dr. Summers before?
               </h4>
               <div class="already-seen-box my-2">
                 <div>
-                  <input type="radio" name="already-seen" id="yes" />
+                  <input type="radio" name="already-seen" id="yes" value="yes"/>
                   <label for="yes" class="check">Yes</label>
                 </div>
                 <div>
-                  <input type="radio" name="already-seen" id="no" />
+                  <input type="radio" name="already-seen" id="no" value="no" checked/>
                   <label for="no" class="check">No</label>
                 </div>
               </div>
 
-              <input type="date" class="form-control date-input" />
+              <input type="date" class="form-control date-input" id="previous-appointment-date"/>
             </div>
 
             <!-- STEP CONTENT 2 -->
@@ -302,7 +297,7 @@
             <button class="btn btn--purple-outline btn-perv d-none">
               Previous step
             </button>
-            <button class="btn btn--purple btn-next">Next</button>
+            <button class="btn btn--purple btn-next mx-3">Next<i class="fa-solid fa-spinner fa-spin mx-2 progress d-none"></i></button>
           </div>
           <div class="appoitment-booked-action-box mb-5 d-none">
             <button class="btn btn--icon btn-cancel-appointment">
@@ -322,5 +317,16 @@
     </section>
 @endsection
 @section('extra-js') 
-  @include('js/profile')
+  @include('js.profile')
+  <script>
+    Dropzone.autoDiscover = false;
+    var myDropzone = new Dropzone("#pet-pictures", {
+      url : "#",
+      autoProcessQueue: false, 
+      parallelUploads: 5, 
+      maxFiles: 5, 
+      acceptedFiles: 'image/*', 
+      addRemoveLinks: true, 
+    });
+  </script>
 @endsection
