@@ -1,91 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/global.css" />
-    <link rel="stylesheet" href="appointments.css " />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
-  </head>
-  <body>
-    <div class="dashboard-layout-wrapper">
-      <div class="dashboard-sidebar">
-        <div class="btn-close"></div>
-        <div class="sidebar-logo">
-          <img src="/assets/images/logo-svg.svg" alt="" />
-        </div>
-        <ul class="links sidebar-links">
-          <li class="list-item">
-            <img src="/assets/images/home-nav-icon.svg" alt="" />
-            <a href="#" class="link">Dashboard</a>
-          </li>
-          <li class="list-item active">
-            <img src="/assets/images/calender-nav-icon.svg" alt="" />
-            <a href="#" class="link">Appointments</a>
-          </li>
-          <li class="list-item">
-            <img src="/assets/images/availbility-nav-icon.svg" alt="" />
-            <a href="#" class="link">Availability</a>
-          </li>
-          <li class="list-item">
-            <img src="/assets/images/service-nav-icon.svg" alt="" />
-            <a href="#" class="link">Services</a>
-          </li>
-          <li class="list-item">
-            <img src="/assets/images/plan-nav-icon.svg" alt="" />
-            <a href="#" class="link">Plans</a>
-          </li>
-          <li class="list-item">
-            <img src="/assets/images/star-nav-icon.svg" alt="" />
-            <a href="#" class="link">Reviews</a>
-          </li>
-          <li class="list-item">
-            <img src="/assets/images/settings-sharp.svg" alt="" />
-            <a href="#" class="link">Subscriptions</a>
-          </li>
-        </ul>
-      </div>
-      <nav class="dashboard-nav">
-        <div class="welcome-box">
-          <button class="btn btn-icon-close">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-list"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-              />
-            </svg>
-          </button>
-          <div>
-            <h2 class="dash-nav-title">Appointments</h2>
-          </div>
-        </div>
-        <div class="profile-box">
-          <div class="notification-box">
-            <img src="/assets/images/BellRinging.svg" alt="" />
-            <span class="num-notification">1</span>
-          </div>
-          <div class="avatar-box">
-            <img
-              src="/assets/images/woman-doctor-wearing-lab-coat-with-stethoscope-isolated (2) 2.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-      </nav>
-      <div class="dashboard-main-content section-appointment">
-        <div class="search-filter-box">
+@extends('layouts.admin')
+@section('title') Dashboard @endsection
+@section('extra-css') 
+<link rel="stylesheet" href="{{asset('assets/css/appointment.css')}}" />
+@endsection
+@section('main-content')
+<div class="search-filter-box">
           <div class="icon-input">
             <img src="/assets/images/searchIcon.svg" alt="" />
             <input
@@ -256,15 +175,7 @@
             </ul>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- THIRD PARTY SCRIPT  -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js
-    "></script>
-    <script src="/js/bootstrap.bundle.js"></script>
-
-    <!-- Custom Script  -->
-    <script src="/js/appointments.js"></script>
-  </body>
-</html>
+@endsection 
+@section('extra-js')
+<script src="{{asset('assets/js/appointments.js')}}"></script>
+@endsection

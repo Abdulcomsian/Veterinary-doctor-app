@@ -14,6 +14,11 @@ class AppointmentController extends Controller
         $this->appointmentHandler = $appointmentHandler;
     }
 
+    public function getAppointmentPage()
+    {
+        return view('appointments');
+    }
+
     public function addAppointment(Request $request)
     {
         
