@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('availability_schedule_id')->nullable();
             $table->unsignedBigInteger('weekly_schedule_id')->nullable();
             $table->unsignedBigInteger('plan_id')->nullable();
-            $table->boolean('is_canceled')->default(0);
+            $table->boolean('status')->default(0);
             $table->boolean('is_non_schedule')->default(0);
             $table->date('date')->nullable();
             $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');

@@ -48,17 +48,20 @@ function updateStepUI() {
 }
 
 nextBtnEl.addEventListener("click", async function () {
-  const isCurrentFormValidated = true;
 
  
   let loader = document.querySelector(".progress")
   let formDetail = getFormDetail();
-  let response = await updateFormData(formDetail.url , formDetail.form , 1 , loader)
+  // let response = await updateFormData(formDetail.url , formDetail.form , 1 , loader)
 
-  if (response && isCurrentFormValidated && activeStep < allStepsContent.length) {
-    activeStep++;
-    updateStepUI();
+  let response = true;
+
+  if (response && activeStep < allStepsContent.length) {
+      activeStep++;
+      updateStepUI();
   }
+
+
 
 });
 
@@ -175,4 +178,6 @@ alldateCardsEl.forEach((card) =>
 document.querySelector(".medical-history-btn").addEventListener("click" , function(e){
   document.getElementById("medical-history").click()
 })
+
+
 </script>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Handlers;
-use App\Models\{Pet , Appointment , PetPhoto};
+use App\Models\{Pet , Appointment , PetPhoto , MedicalHistory};
 class PetHandler{
  
     public function createPetDetails($request)
@@ -10,6 +10,7 @@ class PetHandler{
         $pet->name = $request->petName;
         $pet->age = $request->age;
         $pet->breed = $request->breed;
+        $pet->user_id = auth()->user()->id;
         $pet->save();
 
         $previousCheckup = $request->previousChecked; 
@@ -22,22 +23,21 @@ class PetHandler{
 
         if($request->hasFile('medicalHistory'))
         {
-            $medicalHistory = $request->file('medicalHistory');
-            $filename = strtotime(date('y-m-d')).'-'.str_replace(" " ,"-",$medicalHistory->getClientOriginalName());
-            $medicalHistory->move(public_path('uploads') , $filename);
+                $historyFile = $request->file('medicalHistory');
+                $filename = strtotime(date('y-m-d')).'-'.str_replace(" " ,"-",$historyFile->getClientOriginalName());
+                $historyFile->move(public_path('/uploads') , $filename);
+                MedicalHistory::create(['pet_id' => $pet->id , 'file_link' => $filename]);
         }
 
-        $files = [];
-        foreach($request->file('petProfilePictures') as $key =>  $petPicture)
-        {
-            $filename = strtotime(date('y-m-d')).'-'.str_replace(" " ,"-",$petPicture->getClientOriginalName());
-            $medicalHistory->move(public_path('uploads') , $filename);
-            $files[] = ["pet_id" => $pet->id , 'image' => $filename];
-    
-        }
-
-        if(count($files))
-        {
+        if($request->hasFile('petProfilePictures')){
+            $files = [];
+            foreach($request->file('petProfilePictures') as $key =>  $petPicture)
+            {
+                $filename = strtotime(date('y-m-d')).'-'.str_replace(" " ,"-",$petPicture->getClientOriginalName());
+                $petPicture->move(public_path('uploads') , $filename);
+                $files[] = ["pet_id" => $pet->id , 'image' => $filename];
+        
+            }
             PetPhoto::insert($files);
         }
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Handlers;
 use App\Models\Appointment;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class AppointmentHandler{
 
     public function createAppointment($request)
@@ -28,6 +30,7 @@ class AppointmentHandler{
         return ['status' => true , 'Appointment canceled successfully'];
     }
 
+    
     
 
 }

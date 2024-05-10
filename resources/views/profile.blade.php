@@ -70,21 +70,23 @@
                     />
                   </div>
                   <div class="input-wrapper">
-                    <label for="history" class="form-label"
-                      >Medical History</label
-                    >
-                    <div class="form-control input-group mb-3  medical-history-area medical-history-btn d-flex justify-content-center py-3">
-                      <button type="button" class="btn btn--lightgray">
-                        <img  src="/assets/images/attach.svg" alt="" />
-                      </button>
-                      <input type="file" class="d-none" name="medical-histor" id="medical-history">
+                    <label for="history" class="form-label">Medical History</label>
+                    <div class="form-control input-group mb-3">
+                      <input type="text" class="form-control medical-history-filename" placeholder="Filename" aria-label="filename" aria-describedby="button-addon2" readonly/>
+                      <span class="btn btn--lightgray medical-history-area medical-history-btn"><img src="{{asset('assets/images/attach.svg')}}" alt="" /></span>
+                      <input type="file" class="d-none"  name="medical-history" id="medical-history" onchange="handleFileChange(event)">
                     </div>
+
+                    <!-- <div class="form-control input-group mb-3  medical-history-area medical-history-btn d-flex justify-content-center py-3">
+                      <button type="button" class="btn btn--lightgray"><img  src="/assets/images/attach.svg" alt="" /></button>
+                      <input type="file" class="d-none" name="medical-histor" id="medical-history">
+                    </div> -->
                   </div>
                 </div>
               </form>
               <div class="title size-image-text">
-                <h4 class="title">Pictures (1/5)</h4>
-                <p class="title">(Size should not greater then 5mb)</p>
+                <!-- <h4 class="title">Pictures (1/5)</h4> -->
+                <p class="title">(Picture Size should not greater then 5mb)</p>
               </div>
               <div class="upload">
               <div id="pet-pictures" class="dropzone"></div>
@@ -107,8 +109,10 @@
                   <label for="no" class="check">No</label>
                 </div>
               </div>
-
-              <input type="date" class="form-control date-input" id="previous-appointment-date"/>
+              @php
+                $previousDate = \Carbon\Carbon::now()->subDay(1)->format('Y-m-d');
+              @endphp 
+              <input type="date" class="form-control date-input" id="previous-appointment-date" max="{{$previousDate}}"/>
             </div>
 
             <!-- STEP CONTENT 2 -->
@@ -122,38 +126,44 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper slider-appointments">
                   <!-- Slides -->
+                  @php    
+                    $today = \Carbon\Carbon::now()->format('Y-m-d');
+                    $futureDate = \Carbon\Carbon::now()->addDays(6)->format('Y-m-d');
+                    $dateRange = \Carbon\CarbonPeriod::create($today, $futureDate);
+                  @endphp
+                  @foreach($dateRange as $index => $dr)
+                    @php
+                      $currentDate = $dr->format('Y-m-d');
+                      $dayOfWeek = $dr->format('l');
+                      $availableSchedule = $availabilityScheduleCount->first(function($schedule) use ($currentDate){
+                                                  return $schedule->date == $currentDate;
+                                          });
+                                        
+                      $totalSchedule = 0;
+                      if(!is_null($availableSchedule))
+                      {
+                        $totalSchedule = $availableSchedule->totalAppointments;
+                      }else{
+                        $daySchedule = $weeklyScheduleCount->first(function($schedule) use ($dayOfWeek){
+                                                  return $schedule->weekday == $dayOfWeek;
+                                          });
+
+                        if(!is_null($daySchedule))
+                        {
+                          $totalSchedule = $daySchedule->totalAppointments;
+                        }
+                      }                             
+                  @endphp 
+
+
                   <div class="swiper-slide">
                     <div class="card appoinment-date-card appointment-selected">
-                      <span class="date">13 Mar, 2024 | Wed</span>
-                      <span class="slots-text text--green"
-                        >6 Slots available</span
-                      >
+                      <span class="date">{{ $dr->format('d M, Y | D') }}</span>
+                      <span class="slots-text text--green" >{{ $totalSchedule }} lots available</span>
                     </div>
                   </div>
-                  <div class="swiper-slide">
-                    <div class="card appoinment-date-card">
-                      <span class="date">13 Mar, 2024 | Wed</span>
-                      <span class="slots-text text--red"
-                        >6 Slots available</span
-                      >
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card appoinment-date-card">
-                      <span class="date">13 Mar, 2024 | Wed</span>
-                      <span class="slots-text text--green"
-                        >6 Slots available</span
-                      >
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="card appoinment-date-card">
-                      <span class="date">13 Mar, 2024 | Wed</span>
-                      <span class="slots-text text--green"
-                        >6 Slots available</span
-                      >
-                    </div>
-                  </div>
+                  @endforeach
+                  
                 </div>
               </div>
               <!-- If we need navigation buttons -->
@@ -162,12 +172,33 @@
                 <div class="swiper-button-next"></div>
               </div>
               <div class="seleted-apointment-date">
-                <p class="mb-0">13 Mar, 2024 | Wed</p>
+                <p class="mb-0">{{\Carbon\Carbon::now()->format('d M, Y | D') }}</p>
               </div>
+                    
+
               <div class="appointment-time-box">
+                @php $morning = $afernoon = $evening = $night = 0;
+
+                @if(($todaySchedule->count() == 0 && $todayWeekSchedule->count() == 0 ) ||  ($todaySchedule->count() && $todaySchedule[0]->is_available == 0) )
+                  <div class="time-afternoon">    
+                  <h3>No Slot Available</h3>
+                  </div>
+                @else
                 <div class="time-afternoon">
                   <div class="time-afternoon-box">
-                    <img src="/assets/images/sun.svg" alt="" />
+                    <img src="{{asset('assets/images/morning.png')}}" width="36px" alt="" />
+                    <span class="slot">Morning</span>
+                  </div>
+                  <div class="time-slots">
+                    <span class="slot">09:30 PM</span>
+                    <span class="slot">10:30 PM</span>
+                  </div>
+                </div>
+                @endif
+
+                <div class="time-afternoon">
+                  <div class="time-afternoon-box">
+                    <img src="{{asset('assets/images/sun.svg')}}" alt="" />
                     <span class="slot">Afternoon</span>
                   </div>
                   <div class="time-slots">
@@ -177,7 +208,7 @@
                 </div>
                 <div class="time-afternoon">
                   <div class="time-afternoon-box">
-                    <img src="/assets/images/cloud-fog.svg" alt="" />
+                    <img src="{{asset('assets/images/cloud-fog.svg')}}" alt="" />
                     <span class="slot">Evening</span>
                   </div>
                   <div class="time-slots">
@@ -186,7 +217,7 @@
                 </div>
                 <div class="time-afternoon">
                   <div class="time-afternoon-box">
-                    <img src="/assets/images/moon.svg" alt="" />
+                    <img src="{{asset('assets/images/moon.svg')}}" alt="" />
                     <span class="slot">Night</span>
                   </div>
                   <div class="time-slots">
@@ -328,5 +359,14 @@
       acceptedFiles: 'image/*', 
       addRemoveLinks: true, 
     });
+    
+
+    function handleFileChange(e)
+    {
+      let filename = e.target.files[0].name;
+      document.querySelector(".medical-history-filename").value = filename; 
+    }
+
+
   </script>
 @endsection

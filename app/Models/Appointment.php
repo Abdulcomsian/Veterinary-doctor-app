@@ -13,7 +13,7 @@ class Appointment extends Model
 
     public $table = "appointments";
     public $primaryKey = "id";
-    public $fillable = ['pet_id' , 'schedule_id' , 'weekly_schedule_id' , 'plan_id' , 'is_non_schedule' , 'date' , 'is_canceled'];
+    public $fillable = ['pet_id' , 'schedule_id' , 'weekly_schedule_id' , 'plan_id' , 'is_non_schedule' , 'date' , 'status'];
 
     public function payment()
     {
