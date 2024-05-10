@@ -114,4 +114,9 @@ class ScheduleController extends Controller
             return response()->json(['status' => false , 'error' => $e->getMessage()]);
         }
     }
+
+    public function createSchedulePage()
+    {
+        return view('schedule');
+    }
 }

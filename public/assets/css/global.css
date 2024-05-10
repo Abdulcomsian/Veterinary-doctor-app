@@ -497,6 +497,8 @@ input[type="password"]:after{
 
 .dashboard-main-content{
     padding: 1.5rem;
+    height: 100%;
+    overflow-y: auto;
 }
 .dashboard-nav .dash-nav-title{
     font-size: 2.6rem;
