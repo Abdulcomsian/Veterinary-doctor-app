@@ -12,7 +12,9 @@
         "laravel/socialite": "^5.13",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.5",
-        "spatie/laravel-permission": "^6.7"
+        "spatie/laravel-permission": "^6.7",
+        "stripe/stripe-php": "^14.5",
+        "yoeunes/toastr": "^2.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

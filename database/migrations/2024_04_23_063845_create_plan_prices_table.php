@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('plan_id');
             $table->double('price' , 6 , 2);
-            $table->foreign('plan')->references('id')->on('plans')->onDelete('cascade');
+            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
             $table->timestamp('created_at')->default(now());
             $table->timestamp('updated_at')->default(now());
             $table->softDeletes();

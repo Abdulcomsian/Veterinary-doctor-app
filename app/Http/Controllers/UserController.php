@@ -14,6 +14,17 @@ class UserController extends Controller
         $this->userHandler = $userHandler;    
     }
 
+    public function getProfilePage()
+    {
+        return view('profile');
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('login');
+    }
+
     public function addAppointmentReview(Request $request)
     {
 
