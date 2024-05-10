@@ -5,6 +5,9 @@
     --color-secondary: #B1E5F3;
     --color-secondary-light: #B1E5F333;
 
+    --color-green: #00AE84;
+    --color-green-tint: #DBF4EE;
+
     --color-accent: #EFEFEF;
 
     --color-dark: #000;
@@ -14,6 +17,7 @@
     --color-gray3 : #96A0B5;
 
     --color-orange: #FFD12D;
+    --color-orange-tint: #FFF7DA;  
 
     --color-blue: #1877F2;
     --color-light-blue: #B1E5F366;
@@ -43,7 +47,7 @@ body{
 }
 /* TEXT  */
 .text--green{
-    color: #00AE84;
+    color: var(--color-green);
 }
 .text--red{
     color: #FF6363;
@@ -120,13 +124,21 @@ a:link, a:visited{
     padding: 1rem;
     font-size: 1.8rem;
     font-weight: 500;
+    border-radius: 1000px;
 }
 
 .badge--light-blue{
     background-color: var(--color-light-blue);
-    color: #000  ;
+    color: var(--color-blue);
 }
-
+.badge--green{
+    background-color: var(--color-green-tint);
+    color: var(--color-green);
+}
+.badge--orange{
+    background-color: var(--color-orange-tint);
+    color: var(--color-orange);
+}
 /* GRID SYSTEM DEFAULT SETUP  */
 .grid{
     display: grid;
@@ -287,7 +299,7 @@ input[type="password"]:after{
     margin-inline: 1rem;
 }
 .consultation-card.left-border-green{
-    border-left: 3px solid #00AE84;
+    border-left: 3px solid var(--color-green);
 }
 .consultation-card.left-border-orange{
     border-left: 3px solid var(--color-orange);
@@ -626,7 +638,7 @@ input[type="password"]:after{
     z-index: -1;
     display: block;
     width: 100%;
-    border: 1px dashed #96A0B5;
+    border: 1px dashed var(--color-gray3);
 }
 .list-timeline .list-item::before{
     content: "";
@@ -649,4 +661,13 @@ input[type="password"]:after{
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
+}
+.consultation-card .badge{
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding-block: 0.5rem;
+}
+
+.expendable .consultation-card{
+    cursor: pointer;
 }
