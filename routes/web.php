@@ -28,13 +28,15 @@ Route::get('auth/facebook/callback' , [SocialiteController::class , 'facebookCal
 Route::group(['middleware' => ['prevent.back.header' , 'authenticate.owner']] , function(){ 
     Route::get('profile' , [UserController::class, 'getProfilePage'])->name('getProfilePage');
     Route::post('add-pet' , [PetController::class , 'addPet'])->name('addPet');
+    Route::post('get-appointments' , [AppointmentController::class , 'getAppointment'])->name('getAppointments');
 });
 
 Route::group(['middleware' => ['prevent.back.header' ,'authenticate.admin']] , function(){
     Route::get('/', [UserController::class, 'getProfilePage']);
     Route::get('/home', [UserController::class, 'getProfilePage'])->name('home');
     Route::get('dashboard' , [HomeController::class , 'dashboard'])->name('dashboard');
-    Route::get('appointments' , [AppointmentController::class , 'getAppointmentPage'])->name('getAppointments');
+    Route::get('appointments' , [AppointmentController::class , 'getAppointmentPage'])->name('getAppointmentPage');
+   
 });
 
 Route::get('logout' , [UserController::class , 'logout'])->name('logout');

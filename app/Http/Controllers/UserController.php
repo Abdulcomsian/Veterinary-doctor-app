@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Handlers\{UserHandler , ScheduleHandler};
-
+use Carbon\Carbon;
 class UserController extends Controller
 {
     protected $userHandler;
@@ -20,8 +20,10 @@ class UserController extends Controller
     {
         $availabilityScheduleCount = $this->scheduleHandler->getAvailabilityScheduleCount();
         $weeklyAppointmentCount = $this->scheduleHandler->getWeeklyAppointmentCount();
-        $todaySchedule = $this->scheduleHandler->getTodaySchedule();
-        $todayWeeklySchedule = $this->scheduleHandler->gettodayWeeklySchedule();
+        $today = Carbon::now()->format('Y-m-d'); 
+        $todaySchedule = $this->scheduleHandler->getTodaySchedule($today);
+        $today = Carbon::now()->dayOfWeek;
+        $todayWeeklySchedule = $this->scheduleHandler->gettodayWeeklySchedule($today);
         return view('profile')->with([  
                                       'availabilityScheduleCount' => $availabilityScheduleCount, 
                                       'weeklyScheduleCount' => $weeklyAppointmentCount,
@@ -29,6 +31,8 @@ class UserController extends Controller
                                       'todayWeeklySchedule' => $todayWeeklySchedule
                                     ]);
     }
+
+  
 
     public function logout()
     {

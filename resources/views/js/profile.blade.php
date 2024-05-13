@@ -33,7 +33,6 @@ function updateActionBtns(stepNum) {
 
 function updateStepUI() {
   allStepsContent.forEach((step, i, stepArr) => {
-    console.log(stepArr.length);
     step.classList.add("d-none");
     if (i + 1 <= allSteps.length) allSteps[i].classList.remove("step-active");
   });

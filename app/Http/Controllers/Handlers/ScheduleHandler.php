@@ -190,17 +190,16 @@ class ScheduleHandler{
         return $availabilitySchedule;
     }
 
-    public function getTodaySchedule()
+    public function getTodaySchedule($date)
     {
-        $today = Carbon::now()->format('Y-m-d');
-        $todaySchedule = AvailabilitySchedule::where('date' , Date($today))->orderBy('time' , 'asc')->get();
+        
+        $todaySchedule = AvailabilitySchedule::where('date' , Date($date))->orderBy('time' , 'asc')->get();
         return $todaySchedule;
     }
 
-    public function getTodayWeeklySchedule()
+    public function getTodayWeeklySchedule($date)
     {
-        $today = Carbon::now()->dayOfWeek;
-        $todayWeeklySchedule = AvailabilitySchedule::where('day' , $today)->orderBy('time' , 'desc')->get();
+        $todayWeeklySchedule = WeeklySchedule::where('day' , $date)->orderBy('time' , 'asc')->get();
         return $todayWeeklySchedule;
     }
 

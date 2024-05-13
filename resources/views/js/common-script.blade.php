@@ -23,7 +23,11 @@
                         response = res.status
                     break;
                     case (2):
-                        // update html
+                        if(res.status){
+                            html.innerHTML = res.html;
+                        }else{
+                            toastr.error(res.error)
+                        }
                     break;
                     case (3):
                         //return data
