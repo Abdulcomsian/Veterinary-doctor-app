@@ -2,6 +2,7 @@
 
     async function updateFormData(url , form , type = null, loader = null , modal = null  , cb = null , html = null){
         form.append("_token" , "{{csrf_token()}}");
+        let response = null;
         $.ajax({
             url : url,
             type : 'POST', 
@@ -12,11 +13,21 @@
             success: function(res){
                 switch(type){
                     case (1):
-                        //return boolean response
-                        return true;
+                        //return boolean
+                        if(res.status){
+                            toastr.success(res.msg)
+                        }else{
+                            toastr.error(res.error)
+                        }
+                        
+                        response = res.status
                     break;
                     case (2):
-                        // update html
+                        if(res.status){
+                            html.innerHTML = res.html;
+                        }else{
+                            toastr.error(res.error)
+                        }
                     break;
                     case (3):
                         //return data
@@ -29,6 +40,12 @@
                 
             }
         })
+
+        if(response !== null)
+        {
+            return response;
+        }
+
     }
 
 </script>

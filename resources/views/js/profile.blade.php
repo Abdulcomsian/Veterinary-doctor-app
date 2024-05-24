@@ -33,7 +33,6 @@ function updateActionBtns(stepNum) {
 
 function updateStepUI() {
   allStepsContent.forEach((step, i, stepArr) => {
-    console.log(stepArr.length);
     step.classList.add("d-none");
     if (i + 1 <= allSteps.length) allSteps[i].classList.remove("step-active");
   });
@@ -48,17 +47,21 @@ function updateStepUI() {
 }
 
 nextBtnEl.addEventListener("click", async function () {
-  const isCurrentFormValidated = true;
 
  
   let loader = document.querySelector(".progress")
   let formDetail = getFormDetail();
   // let response = await updateFormData(formDetail.url , formDetail.form , 1 , loader)
 
-  if ( isCurrentFormValidated && activeStep < allStepsContent.length) {
-    activeStep++;
-    updateStepUI();
+
+  if (response && activeStep < allStepsContent.length) {
+      activeStep++;
+      updateStepUI();
+
+
   }
+
+
 
 });
 
@@ -175,4 +178,6 @@ alldateCardsEl.forEach((card) =>
 document.querySelector(".medical-history-btn").addEventListener("click" , function(e){
   document.getElementById("medical-history").click()
 })
+
+
 </script>

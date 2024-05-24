@@ -23,8 +23,8 @@ class PetController extends Controller
             "breed" => 'required|string',
             "previousChecked" => 'required|boolean',
             "previousAppointmentDate" => 'nullable|date_format:Y-m-d',
-            "medicalHistory" => 'nullable|files',
-            "petProfilePictures" => 'files|mimes:jpg,png,jpeg'
+            "medicalHistory" => 'nullable|file',
+            "petProfilePictures.*" => 'file|mimes:jpg,png,jpeg'
         ]);
 
 

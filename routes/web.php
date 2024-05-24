@@ -25,18 +25,26 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('google-login' , [SocialiteController::class , 'googleLogin'])->name('googleLogin');
 Route::get('auth/google/callback' , [SocialiteController::class , 'googleCallback'])->name('googleCallback');
 Route::get('facebook-login' , [SocialiteController::class , 'facebookLogin'])->name('facebookLogin');
 Route::get('auth/facebook/callback' , [SocialiteController::class , 'facebookCallback'])->name('facebookCallback');
 
-Route::group(['middleware' => ['prevent.back.header' ,'auth']] , function(){
-    Route::get('/', [UserController::class, 'getProfilePage']);
+Route::group(['middleware' => ['prevent.back.header' , 'authenticate.owner']] , function(){ 
     Route::get('profile' , [UserController::class, 'getProfilePage'])->name('getProfilePage');
-    Route::get('logout' , [UserController::class , 'logout'])->name('logout');
     Route::post('add-pet' , [PetController::class , 'addPet'])->name('addPet');
+    Route::post('get-appointments' , [AppointmentController::class , 'getAppointment'])->name('getAppointments');
+});
+
+Route::group(['middleware' => ['prevent.back.header' ,'authenticate.admin']] , function(){
+    Route::get('/', [UserController::class, 'getProfilePage']);
+    Route::get('/home', [UserController::class, 'getProfilePage'])->name('home');
     Route::get('dashboard' , [HomeController::class , 'dashboard'])->name('dashboard');
-    Route::get('appointments' , [AppointmentController::class , 'getAppointmentPage'])->name('getAppointments');
+   
+});
+
+Route::get('logout' , [UserController::class , 'logout'])->name('logout');
+
     Route::get('schedule' , [ScheduleController::class , 'createSchedulePage'])->name('createSchedulePage');
 });
