@@ -53,11 +53,12 @@ nextBtnEl.addEventListener("click", async function () {
   let formDetail = getFormDetail();
   // let response = await updateFormData(formDetail.url , formDetail.form , 1 , loader)
 
-  let response = true;
 
   if (response && activeStep < allStepsContent.length) {
       activeStep++;
       updateStepUI();
+
+
   }
 
 
