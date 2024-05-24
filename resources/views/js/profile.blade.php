@@ -53,9 +53,9 @@ nextBtnEl.addEventListener("click", async function () {
  
   let loader = document.querySelector(".progress")
   let formDetail = getFormDetail();
-  let response = await updateFormData(formDetail.url , formDetail.form , 1 , loader)
+  // let response = await updateFormData(formDetail.url , formDetail.form , 1 , loader)
 
-  if (response && isCurrentFormValidated && activeStep < allStepsContent.length) {
+  if ( isCurrentFormValidated && activeStep < allStepsContent.length) {
     activeStep++;
     updateStepUI();
   }

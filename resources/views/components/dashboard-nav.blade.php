@@ -6,7 +6,7 @@
             </svg>
         </button>
         <div>
-            <h2 class="dash-nav-title">Dashboard</h2>
+            <h2 class="dash-nav-title">@yield('title')</h2>
             <p class="welcome-text">Welcome Dr. Meg Summer! 👋</p>
         </div>
     </div>

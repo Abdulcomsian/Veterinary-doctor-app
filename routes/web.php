@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AppointmentController, HomeController, SocialiteController, UserController , PetController};
+use App\Http\Controllers\{
+        AppointmentController, 
+        HomeController, 
+        SocialiteController, 
+        UserController, 
+        ScheduleController,
+        PetController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,4 +38,5 @@ Route::group(['middleware' => ['prevent.back.header' ,'auth']] , function(){
     Route::post('add-pet' , [PetController::class , 'addPet'])->name('addPet');
     Route::get('dashboard' , [HomeController::class , 'dashboard'])->name('dashboard');
     Route::get('appointments' , [AppointmentController::class , 'getAppointmentPage'])->name('getAppointments');
+    Route::get('schedule' , [ScheduleController::class , 'createSchedulePage'])->name('createSchedulePage');
 });

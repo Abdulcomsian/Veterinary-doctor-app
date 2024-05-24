@@ -12,6 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 2rem;
 }
 .search-filter-box .form-select{
     font-family: "Poppins";
@@ -39,6 +40,9 @@
 
     font-size: 20px;
     font-weight: 500;
+}
+.card-main{
+    border: 0;
 }
 
 .section-appointment .card-main{
@@ -106,7 +110,25 @@
 }
 .appointment-content {
     padding: 1.5rem;
+    border: 1px solid var(--border-gray-color);
     border-radius: var(--border-radius-huge);
+    position: relative;
+    margin-bottom: 3rem;
+}
+.appointment-content::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: z-index 0.3s;
+}
+.appointment-content::after:hover{
+    z-index: -1;
 }
 
 .item-appointment{
@@ -115,7 +137,7 @@
     gap: 1rem;
 }
 
-.item-appointment .consultation-card-wrapper{
+.item-content-box{
     flex-grow: 1;
 }
 
@@ -162,4 +184,86 @@
     grid-column: 3 / -1;
     align-self: end;
     justify-self: end;
+}
+.list-appointments{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-block: 3rem;
+    min-height: 270px;
+}
+.list-appointments .time{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #96A0B5;
+    margin-top: 1.7rem  ;
+}
+
+.item-appointment .consultation-card .consultation-info{
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+#appointments-Table .badge{
+    padding-inline: 0.8rem;
+    padding-block: 0.5rem;
+    font-size: 1.2rem;
+}
+#appointments-Table thead th{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-gray3);
+}
+#appointments-Table tbody td{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #1B1D28;
+}
+#appointments-Table tbody tr{
+    border-bottom: 1px solid var(--color-gray3);
+}
+#appointments-Table tbody tr:last-child{
+    border-bottom: 0 !important;
+}
+#appointments-Table .petname{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+#appointments-Table .image-box{
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 0;
+    overflow: hidden;
+    display: inline-block;
+}
+#appointments-Table .image-box img{
+    width: 100%;
+    object-fit: cover;
+}
+#appointments-Table .img-col{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+#appointments-Table .badge-col{
+    text-align: center;
+}
+
+table.dataTable > thead > tr > th{
+    border-bottom: 1px solid var(--border-gray-color) !important;
+}
+table.dataTable > tbody > tr{
+    border-bottom: 0 !important;
+}
+.sorting_1{
+    box-shadow: none !important;
+}
+table.dataTable.display > tbody > tr:nth-child(odd) > .sorting_1, table.dataTable.order-column.stripe > tbody > tr:nth-child(odd) > .sorting_1{
+    box-shadow: none !important;
+}
+
+table.dataTable.display > tbody > tr:nth-child(odd) > * {
+    box-shadow: none !important;
 }
