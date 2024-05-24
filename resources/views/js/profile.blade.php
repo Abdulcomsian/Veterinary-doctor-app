@@ -179,4 +179,29 @@ document.querySelector(".medical-history-btn").addEventListener("click" , functi
 })
 
 
+async function addAppointmentChargeAmount()
+{
+        const { setupIntent, error} = await stripe.confirmCardSetup( '{{$clientSecret}}' , {
+                                                                        payment_method : {
+                                                                            card : card,
+                                                                        }
+                                                                });
+
+
+        if(error){
+            toastr.error(error.message);
+            loader.classList.remove("d-none");
+            return;
+        }else{
+
+            
+            let url = this.getAttribute('action');
+            let submitBtn = this.querySelector(".submit-btn");
+            form.append('payment_method' , setupIntent.payment_method);
+            addFormData(url , form , loader , null , submitBtn , null)
+
+        }
+}
+
+
 </script>

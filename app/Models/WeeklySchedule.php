@@ -11,5 +11,10 @@ class WeeklySchedule extends Model
     use HasFactory , SoftDeletes;
     public $table = "weekly_schedules";
     public $primaryKey = "id";
-    public $fillable = ['day' , 'time' , 'is_available'];
+    public $fillable = ['day' , 'is_available'];
+
+    public function time()
+    {
+        return $this->morphMany(ScheduleTime::class , 'timeable');
+    }
 }
