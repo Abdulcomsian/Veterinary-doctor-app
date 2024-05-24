@@ -45,6 +45,4 @@ Route::group(['middleware' => ['prevent.back.header' ,'authenticate.admin']] , f
 });
 
 Route::get('logout' , [UserController::class , 'logout'])->name('logout');
-
-    Route::get('schedule' , [ScheduleController::class , 'createSchedulePage'])->name('createSchedulePage');
-});
+Route::get('schedule' , [ScheduleController::class , 'createSchedulePage'])->name('createSchedulePage');
