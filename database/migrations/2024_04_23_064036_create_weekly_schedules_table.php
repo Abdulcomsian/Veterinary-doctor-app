@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('weekly_schedules', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('day');
-            $table->time('time')->nullable();
             $table->boolean('is_available')->default(1);
             $table->timestamp('created_at')->default(now());
             $table->timestamp('updated_at')->default(now());

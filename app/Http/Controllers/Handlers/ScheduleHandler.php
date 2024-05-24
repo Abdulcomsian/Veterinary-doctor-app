@@ -176,16 +176,22 @@ class ScheduleHandler{
         $futureDate = Carbon::now()->addDays(6)->format('Y-m-d');
         
    
-        $availabilitySchedule = DB::table('availability_schedules')
-                                    ->selectRaw('SUM(CASE WHEN is_available = 1 THEN 1 ELSE 0 END) as totalAppointments, date')
-                                    ->whereRaw('Date(date) >= ? and Date(date) <= ?', [$today, $futureDate])
-                                    ->whereNotExists(function($query){
-                                        $query->select(DB::raw(1))
-                                        ->from('appointments')
-                                        ->whereRaw('appointments.availability_schedule_id = availability_schedules.id');
-                                    })
-                                    ->groupBy('date')
-                                    ->get();
+        // $availabilitySchedule = DB::table('availability_schedules')
+        //                             ->selectRaw('SUM(CASE WHEN is_available = 1 THEN 1 ELSE 0 END) as totalAppointments, date')
+        //                             ->whereRaw('Date(date) >= ? and Date(date) <= ?', [$today, $futureDate])
+        //                             ->whereNotExists(function($query){
+        //                                 $query->select(DB::raw(1))
+        //                                 ->from('appointments')
+        //                                 ->whereRaw('appointments.availability_schedule_id = availability_schedules.id');
+        //                             })
+        //                             ->groupBy('date')
+        //                             ->get();
+
+        $availabilitySchedule = AvailabilitySchedule::with(['time' => function($query){
+                                                                $query->doesnthave('appointment'); 
+                                                    }])
+                                                    ->whereRaw('Date(date) >= ? and Date(date) <= ?', [$today, $futureDate])
+                                                    ->get();
         
         return $availabilitySchedule;
     }
@@ -193,13 +199,13 @@ class ScheduleHandler{
     public function getTodaySchedule($date)
     {
         
-        $todaySchedule = AvailabilitySchedule::where('date' , Date($date))->orderBy('time' , 'asc')->get();
+        $todaySchedule = AvailabilitySchedule::with('time')->where('date' , Date($date))->first();
         return $todaySchedule;
     }
 
-    public function getTodayWeeklySchedule($date)
+    public function getTodayWeeklySchedule($day)
     {
-        $todayWeeklySchedule = WeeklySchedule::where('day' , $date)->orderBy('time' , 'asc')->get();
+        $todayWeeklySchedule = WeeklySchedule::with('time')->where('day' , $day)->first();
         return $todayWeeklySchedule;
     }
 

@@ -2,6 +2,16 @@
 @section('title')Profile @endsection
 @section('extra-css') 
   <link rel="stylesheet" href="{{asset('assets/css/profile.css')}}" />
+  <style>
+    span.slot.slot-list.active {
+      background-color: var(--color-primary);
+      color: #fff;
+  }
+
+  .slot-list{
+    cursor: pointer;
+  }
+  </style>
 @endsection
 @section('main-content')
     <section class="section-book-appointment mt-3">
@@ -181,7 +191,7 @@
 
               <div class="appointment-time-box">
                 
-              @if(($todaySchedule->count() == 0 && $todayWeekSchedule->count() == 0 ) ||  ($todaySchedule->count() && $todaySchedule[0]->is_available == 0) )
+              @if((!$todaySchedule && !$todayWeeklySchedule ) ||  ($todaySchedule && $todaySchedule->is_available == 0) )
                   <div class="time-afternoon">    
                     <h3>No Slot Available</h3>
                   </div>
@@ -190,7 +200,7 @@
                     
 
                   @php 
-                     $schedules = $todaySchedule->count() ? $todaySchedule : $todayWeekSchedule;
+                     $schedules = $todaySchedule ? $todaySchedule : $todayWeeklySchedule;
                      $morning = \Carbon\Carbon::parse("06:00:00");
                      $afternoon = \Carbon\Carbon::parse("12:00:00");
                      $evening = \Carbon\Carbon::parse("18:00:00");
@@ -311,9 +321,15 @@
 
               </div>
 
+            </div>
     
 
-            <!-- STEP CONTENT 3 -->
+            
+            
+            
+            
+            
+              <!-- STEP CONTENT 3 -->
             <div class="step-content step-content-3 mb-5 d-none">
               <h2 class="detail-title">Appointment Summary</h2>
               <p class="detail-desc">
@@ -359,6 +375,15 @@
             <div class="step-content step-content-4 mb-5 d-none">
               <h2 class="detail-title">Payment</h2>
               <p class="detail-desc">
+              
+              <div class="container px-0">
+                <div class="row">
+                    <div class="col-6">
+                        <div id="card-element"></div>
+                    </div>
+                </div>
+              </div>
+              
                 Please review your appointment details before proceeding to
                 payment.
               </p>
@@ -432,6 +457,7 @@
     </section>
 @endsection
 @section('extra-js') 
+<script src="https://js.stripe.com/v3/"></script>
   @include('js.profile')
   <script>
     Dropzone.autoDiscover = false;
@@ -443,6 +469,18 @@
       acceptedFiles: 'image/*', 
       addRemoveLinks: true, 
     });
+
+    $(document).ready(function(e){
+      var stripe = Stripe('{{env("STRIPE_KEY")}}')
+
+      createCardElements()
+      
+      function createCardElements(){
+            const element = stripe.elements();
+            card = element.create('card')
+            card.mount("#card-element");
+        }
+    })
     
 
     function handleFileChange(e)
@@ -452,7 +490,6 @@
     }
 
     $(document).on("click" , ".appointment-date" , function(e){
-      alert("I am clicked")
       let appointmentDate = this.dataset.appointmentDate;
       let url = "{{route('getAppointments')}}";
       let form = new FormData;
@@ -460,6 +497,18 @@
       form.append('appointmentDate' , appointmentDate );
       updateFormData(url , form ,  2 , null  , null , null , html)
     });
+
+    $(document).on("click" , ".slot-list" , function(e){
+      if(e.target.classList.contains('active')) {
+        e.target.classList.remove('active')
+      }else {
+         if(document.querySelector(".slot-list.active"))
+         {
+          document.querySelector(".slot-list.active").classList.remove("active");
+         }
+         e.target.classList.add('active')
+      }
+    })
 
 
   </script>

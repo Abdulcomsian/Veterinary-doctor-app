@@ -54,7 +54,7 @@ nextBtnEl.addEventListener("click", async function () {
   // let response = await updateFormData(formDetail.url , formDetail.form , 1 , loader)
 
 
-  if (response && activeStep < allStepsContent.length) {
+  if (activeStep < allStepsContent.length) {
       activeStep++;
       updateStepUI();
 
@@ -178,6 +178,31 @@ alldateCardsEl.forEach((card) =>
 document.querySelector(".medical-history-btn").addEventListener("click" , function(e){
   document.getElementById("medical-history").click()
 })
+
+
+async function addAppointmentChargeAmount()
+{
+        const { setupIntent, error} = await stripe.confirmCardSetup( '{{$clientSecret}}' , {
+                                                                        payment_method : {
+                                                                            card : card,
+                                                                        }
+                                                                });
+
+
+        if(error){
+            toastr.error(error.message);
+            loader.classList.remove("d-none");
+            return;
+        }else{
+
+            
+            let url = this.getAttribute('action');
+            let submitBtn = this.querySelector(".submit-btn");
+            form.append('payment_method' , setupIntent.payment_method);
+            addFormData(url , form , loader , null , submitBtn , null)
+
+        }
+}
 
 
 </script>

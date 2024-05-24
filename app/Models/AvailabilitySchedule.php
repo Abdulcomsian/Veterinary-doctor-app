@@ -5,22 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Appointment;
+use App\Models\{ ScheduleTime};
 class AvailabilitySchedule extends Model
 {
     use HasFactory , SoftDeletes;
     
     public $table = "availability_schedules";
     public $primaryKey = "id";
-    public $fillable = ['date' , 'time' , 'is_available' ];
+    public $fillable = ['date' , 'is_available' ];
 
-    public function appointment()
+    public function time()
     {
-        return $this->hasOne(Appointment::class , 'schedule_id' , 'id')->where('is_canceled' , 0);
+        return $this->morphMany(ScheduleTime::class , 'timeable');
     }
 
-    public function cancelAppointments()
-    {
-        return $this->hasMany(Appointment::class , 'schedule_id' , 'id')->where('is_canceled' , 1);
-    }
 }
