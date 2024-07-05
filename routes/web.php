@@ -19,10 +19,13 @@ use App\Http\Controllers\{
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/', function () {
+    return view('index');
+});
 Auth::routes();
 
 
@@ -38,7 +41,7 @@ Route::group(['middleware' => ['prevent.back.header' , 'authenticate.owner']] , 
 });
 
 Route::group(['middleware' => ['prevent.back.header' ,'authenticate.admin']] , function(){
-    Route::get('/', [UserController::class, 'getProfilePage']);
+    Route::get('/profile', [UserController::class, 'getProfilePage']);
     Route::get('/home', [UserController::class, 'getProfilePage'])->name('home');
     Route::get('dashboard' , [HomeController::class , 'dashboard'])->name('dashboard');
    
