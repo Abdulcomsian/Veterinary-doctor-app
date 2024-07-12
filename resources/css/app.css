@@ -3,3 +3,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.lined-text {
+    @apply relative text-center font-montserrat text-base font-bold text-[#6F6F6F] px-4;
+  }
+  .lined-text::before,
+  .lined-text::after {
+    content: "";
+    @apply absolute top-1/2 w-[14%] h-px bg-[#CECECE];
+  }
+  .lined-text::before {
+    @apply -left-10 text-[#CECECE];
+  }
+  .lined-text::after {
+    @apply -right-10 text-[#CECECE];
+  }
+
+.faq-text {
+    @apply relative text-center font-montserrat text-base font-bold text-[#6F6F6F] px-4;
+  }
+  .faq-text::before,
+  .faq-text::after {
+    content: "";
+    @apply absolute top-1/2 w-2/5 h-px bg-[#CECECE];
+  }
+  .faq-text::before {
+    @apply -left-6 text-[#CECECE];
+  }
+  .faq-text::after {
+    @apply -right-6 text-[#CECECE];
+  }
+
+  /*FAQ background color*/
+  .bg-faq {
+    background-color: rgba(177, 229, 243, 0.2);
+}
