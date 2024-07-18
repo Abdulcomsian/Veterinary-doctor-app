@@ -4,13 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 .lined-text {
-    @apply relative text-center font-montserrat text-base font-bold text-[#6F6F6F] px-4;
+    @apply relative text-center font-montserrat text-base font-bold text-[#6F6F6F];
   }
   .lined-text::before,
   .lined-text::after {
     content: "";
-    @apply absolute top-1/2 w-[14%] h-px bg-[#CECECE];
+    @apply absolute top-1/2 w-8 h-px bg-[#CECECE];
   }
   .lined-text::before {
     @apply -left-10 text-[#CECECE];
@@ -33,16 +35,6 @@
   .faq-text::after {
     @apply -right-6 text-[#CECECE];
   }
-
-.heading-1{
-
-font-size: 45px;
-font-weight: 700;
-line-height: 54px;
-letter-spacing: 0.5px;
-text-align: center;
-
-}
 
   /*FAQ background color*/
   .bg-faq {

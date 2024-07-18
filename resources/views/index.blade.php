@@ -7,6 +7,22 @@
     @vite('resources/css/app.css')
 
 </head>
+<style>
+    .bg-with-opacity::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('{{ asset('assets/images/map.png') }}');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+        /* Adjust the opacity here */
+        z-index: -1;
+    }
+</style>
 
 <body>
     <!--Header Section Starts-->
@@ -42,7 +58,7 @@
             </div>
         </nav>
         <section
-            class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 text-black flex justify-between items-center font-workSans text-sm py-2">
+            class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-black flex justify-between items-center font-workSans text-sm py-2">
             <div class="w-32">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="w-full h-full">
             </div>
@@ -94,13 +110,13 @@
 
                 <div
                     class="flex flex-col justify-center md:text-left text-center w-full md:max-w-xl md:pl-10 mb-4 md:mb-0">
-                    <h1 class="font-semibold text-2xl mb-4">Welcome to Dr. Summers Pet Care</h1>
+                    <h1 class="font-semibold text-2xl mb-4  text-center">Welcome to Dr. Summers Pet Care</h1>
                     <p class="font-bold text-3xl md:text-5xl mb-4">A Veterinary Concierge
                         Telehealth Service</p>
                     <p class="font-medium text-lg">Where compassion meets convenience!</p>
                 </div>
-                <div class="relative w-96  flex items-center justify-end mb-0">
-                    <img src="{{ asset('assets/images/vector.svg') }}" alt="" class="absolute left-11 ">
+                <div class="relative  w-72 md:w-96  flex items-center justify-center md:justify-end mb-0">
+                    <img src="{{ asset('assets/images/vector.svg') }}" alt="" class="absolute md:left-11 ">
                     <img src="{{ asset('assets/images/dr-summer.png') }}" alt=""
                         class="relative w-full h-full object-contain z-10">
                 </div>
@@ -111,10 +127,11 @@
     <!--Hero Section Ends-->
 
     <!--Services Section Starts-->
-    <section class="max-w-7xl px-2 sm:px-6 lg:px-8  pt-5 mx-auto  flex justify-center py-6">
+    <section class="max-w-7xl px-4 sm:px-6 lg:px-8   mx-auto  flex justify-center py-8">
         <div class="flex flex-col items-center w-full">
 
-            <p class="font-montserrat text-base font-bold text-[#6F6F6F] lined-text">What Dr. Summers Offers Services
+            <p class="font-montserrat text-base font-bold text-[#6F6F6F] lined-text md:px-4">What Dr. Summers Offers
+                Services
             </p>
             <h2 class="text-3xl font-montserrat font-bold">Services</h2>
             <img src="{{ asset('assets/images/pet-icon.svg') }}" alt="pet icon" class="mb-6">
@@ -267,6 +284,7 @@
         </div>
     </section>
     <!--Services Section Ends-->
+
     <!--Frequently Asked Questions Section Starts-->
     <section class="bg-faq">
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 pt-5 mx-auto flex justify-center py-8">
@@ -274,7 +292,7 @@
                 <h3 class="font-montserrat text-base font-bold text-[#6F6F6F] faq-text">
                     FAQ
                 </h3>
-                <h2 class="text-3xl font-montserrat font-bold">Frequently Ask Questions</h2>
+                <h2 class="text-3xl font-montserrat font-bold text-center">Frequently Ask Questions</h2>
                 <img src="{{ asset('assets/images/pet-icon.svg') }}" alt="pet icon" class="mb-6">
                 <div class="flex flex-col lg:flex-row justify-between">
                     <div class='accordion-group w-full lg:w-2/4' data-accordion="default-accordion">
@@ -487,6 +505,72 @@
         </div>
     </section>
     <!--Frequently Asked Questions Section Ends-->
+
+
+    <!--Testimonials Section Starts-->
+    <section id="testimonials" class="relative bg-with-opacity">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 pt-5 mx-auto flex justify-center py-8 relative z-10">
+            <div class="flex flex-col  items-center w-full">
+
+                <h3 class="font-montserrat text-base font-bold text-[#6F6F6F] lined-text md:px-4">
+                    What Pet Parents Say
+                </h3>
+                <h2 class="text-3xl font-montserrat text-center font-bold uppercase pb-8">testimonials</h2>
+                <div class="flex flex-col md:flex-row md:-mx-3">
+                    <div class="flex-1 md:pr-4">
+                        <div class="p-12 rounded-lg border border-solid border-gray-200 mb-8"
+                            style="box-shadow:0 10px 28px rgba(0,0,0,.08)">
+                            <p class="text-xl font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                            <p class="mt-6">Eu lobortis elementum nibh tellus molestie nunc non blandit massa. Sit
+                                amet consectetur adipiscing elit duis.</p>
+                            <div class="flex items-center mt-8">
+                                <img class="w-12 h-12 mr-4 rounded-full"
+                                    src="https://randomuser.me/api/portraits/men/15.jpg" alt="Jane Doe">
+                                <div>
+                                    <p>Jane Doe</p>
+                                    <p class="text-sm text-gray-600">Director of Research and Data</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1 md:pr-4">
+                        <div class="p-12 rounded-lg border border-solid border-gray-200 mb-8"
+                            style="box-shadow:0 10px 28px rgba(0,0,0,.08)">
+                            <p class="text-xl font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                            <p class="mt-6">Eu lobortis elementum nibh tellus molestie nunc non blandit massa. Sit
+                                amet consectetur adipiscing elit duis.</p>
+                            <div class="flex items-center mt-8">
+                                <img class="w-12 h-12 mr-4 rounded-full"
+                                    src="https://randomuser.me/api/portraits/men/15.jpg" alt="John Doe">
+                                <div>
+                                    <p>John Doe</p>
+                                    <p class="text-sm text-gray-600">Director of Research and Data</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="p-12 rounded-lg border border-solid border-gray-200 mb-8"
+                            style="box-shadow:0 10px 28px rgba(0,0,0,.08)">
+                            <p class="text-xl font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+                            <p class="mt-6">Eu lobortis elementum nibh tellus molestie nunc non blandit massa. Sit
+                                amet consectetur adipiscing elit duis.</p>
+                            <div class="flex items-center mt-8">
+                                <img class="w-12 h-12 mr-4 rounded-full"
+                                    src="https://randomuser.me/api/portraits/men/15.jpg" alt="Jane Smith">
+                                <div>
+                                    <p>Jane Smith</p>
+                                    <p class="text-sm text-gray-600">Director of Research and Data</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Testimonial Section ends-->
+
     <!--Latest News section Starts-->
     <section class="bg-white">
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 pt-5 mx-auto flex justify-center py-10">
@@ -609,6 +693,9 @@
         //     var navbar = document.getElementById('navbar-default');
         //     navbar.classList.toggle('hidden');
         // });
+
+
+
 
         document.querySelectorAll('.accordion-toggle').forEach(button => {
             button.addEventListener('click', () => {
