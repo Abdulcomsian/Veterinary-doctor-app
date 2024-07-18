@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-
+    <title>HomePage</title>
 </head>
 <style>
     .bg-with-opacity::before {
@@ -110,7 +110,7 @@
 
                 <div
                     class="flex flex-col justify-center md:text-left text-center w-full md:max-w-xl md:pl-10 mb-4 md:mb-0">
-                    <h1 class="font-semibold text-2xl mb-4  text-center">Welcome to Dr. Summers Pet Care</h1>
+                    <h1 class="font-semibold text-2xl mb-4  text-center md:text-left">Welcome to Dr. Summers Pet Care</h1>
                     <p class="font-bold text-3xl md:text-5xl mb-4">A Veterinary Concierge
                         Telehealth Service</p>
                     <p class="font-medium text-lg">Where compassion meets convenience!</p>
