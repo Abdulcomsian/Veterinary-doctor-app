@@ -94,17 +94,18 @@
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 flex pt-5 mx-auto  justify-between">
             <div class="w-full flex flex-col md:flex-row items-center md:justify-between">
 
-                <div
-                    class="flex flex-col font-montserrat justify-center md:text-left text-center w-full mb-4 md:mb-0">
+                <div class="flex flex-col font-montserrat justify-center md:text-left text-center w-full mb-4 md:mb-0">
                     <p class="font-bold text-xl  text-center md:text-left mb-4">Welcome to</p>
-                    <div class="font-bold text-white text-3xl mb-4 bg-pinkish max-w-max p-2 mx-auto md:mx-0">Dr. Meg Summers</div>
+                    <div class="font-bold text-white text-3xl mb-4 bg-pinkish max-w-max p-2 mx-auto md:mx-0">Dr. Meg
+                        Summers</div>
                     <p class="font-medium text-2xl">VETERINARY CONCIERGE TELEHEALTH SERVICES</p>
                 </div>
                 <div class="w-full  flex items-center justify-center">
                     <div class="w-64">
-                        <img src="{{ asset('assets/images/dr-summer-with-dog.png') }}" alt="" class=" w-full h-full">
+                        <img src="{{ asset('assets/images/dr-summer-with-dog.png') }}" alt=""
+                            class=" w-full h-full">
                     </div>
-     
+
                 </div>
             </div>
         </div>
@@ -112,26 +113,84 @@
     </section>
     <!--Hero Section Ends-->
 
-      <!--Frequently Asked Questions Section Starts-->
-      <section class="bg-white">
-        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 pt-5 mx-auto flex justify-center py-8">
+    <!--About  Section Starts-->
+    <section class="bg-white">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto pt-10">
             <div class="flex flex-col  items-center w-full">
                 <h3 class="font-montserrat text-base font-bold text-[#6F6F6F] faq-text">
                     About
                 </h3>
                 <h2 class="text-3xl font-montserrat font-bold text-center">DR Meg SUMMERS</h2>
                 <img src="{{ asset('assets/images/pet-icon.svg') }}" alt="pet icon" class="mb-4">
-                <p class="w-full max-w-[43rem] font-montserrat font-medium mx-auto text-center">I'm a dedicated small animal veterinarian with a passion for providing personalized and compassionate care to pets and their families. After graduating from Lincoln Memorial University College of Veterinary Medicine in 2020, I embarked on a journey in veterinary medicine that has led me from the bustling streets of New York City to the serene shores of the Hamptons.</p>
+                <p class="w-full max-w-[43rem] font-montserrat font-medium mx-auto text-center mb-4">I'm a dedicated small
+                    animal veterinarian with a passion for providing personalized and compassionate care to pets and
+                    their families. After graduating from Lincoln Memorial University College of Veterinary Medicine in
+                    2020, I embarked on a journey in veterinary medicine that has led me from the bustling streets of
+                    New York City to the serene shores of the Hamptons.</p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between">
+
+                <div class="w-full md:max-w-sm flex flex-col sm:flex-row md:flex-col justify-center font-montserrat">
+                    <div class="w-full flex flex-col items-center md:items-end text-center md:text-right mb-6">
+                        <img src="{{ asset('assets/images/sanitizer.svg') }}" alt="sanitizer image" class="mb-2">
+                        <p class="mb-2 text-lg font-semibold">USDA Accredited </p>
+                        <time datetime="2024-07-19" class="mb-2 text-sm">(2022)</time>
+                    </div>
+                    <div class="w-full flex flex-col items-center md:items-end text-center md:text-right mb-6 sm:mx-2 md:mx-0">
+                        <img src="{{ asset('assets/images/palm-icon.svg') }}" alt="pet-palm" class="mb-2">
+                        <p class="mb-2 text-lg font-semibold ">Fear Free Certification Program </p>
+                        <time datetime="2024-07-19" class="mb-2 text-sm ">(April 2021)</time>
+                    </div>
+                    <div class="w-full flex flex-col items-center md:items-end text-center md:text-right mb-6">
+                        <img src="{{ asset('assets/images/pet-care.svg') }}" alt="pet-care" class="mb-2">
+                        <p class="mb-2 text-lg font-semibold">Cornell University CPR Package: Basic &
+                            Advanced Life Support </p>
+                        <time datetime="2024-07-19" class="mb-2 text-sm">(January 2019)</time>
+                    </div>
+                </div>
+                <div class="w-full lg:w-72 mx-4 hidden md:flex items-center lg:items-end">
+                    <img src="{{ asset('assets/images/dr-hug-dog.png') }}" alt="">
+                </div>
+                <div class="w-full md:max-w-sm flex flex-col sm:flex-row md:flex-col md:justify-start lg:justify-center font-montserrat">
+                    <div class="w-full flex flex-col items-center md:items-start text-center md:text-right mb-6">
+                        <img src="{{ asset('assets/images/search-palm-icon.svg') }}" alt="sanitizer image"
+                            class="mb-2">
+                        <p class="mb-2 text-lg font-semibold">Frank 1.0 Communication
+                        </p>
+                        <time datetime="2024-07-19" class="mb-2 text-sm"> (June 2021)</time>
+                    </div>
+                    <div class="w-full flex flex-col items-center md:items-start text-center md:text-right mb-6 sm:mx-2 md:mx-0">
+                        <img src="{{ asset('assets/images/palm-icon.svg') }}" alt="pet-palm" class="mb-2">
+                        <p class="mb-2 text-lg font-semibold">
+                            Licensed Veterinarian
+                        </p>
+                        <time datetime="2024-07-19" class="mb-2 text-sm"> New York 015671 (2020)</time>
+                    </div>
+                    <div class="w-full flex flex-col items-center md:items-start text-center md:text-right mb-6">
+                        <img src="{{ asset('assets/images/search-palm-icon.svg') }}" alt="pet-care" class="mb-2">
+                        <p class="mb-2 text-lg font-semibold">
+                            NAVLE
+                        </p>
+                        <time datetime="2024-07-19" class="mb-2 text-sm">(November 2019)</time>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <!--Frequently Asked Questions Section Ends-->
+    <!--About  Section Ends-->
+
+     <!--Last Paragraph of summer Starts-->
+     <section class="bg-lightBlue">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto py-10">
+
+        </div>
+
+    </section>
+     <!--Last Paragraph of summer Ends-->
 
 
 
 
-
-  
 
     <!--Footer Section Starts-->
     <footer class="bg-footer">
